@@ -1,0 +1,19 @@
+# 500. Keyboard Row
+
+class Solution(object):
+    def findWords(self, words):
+        """
+        :type words: List[str]
+        :rtype: List[str]
+        """
+
+        q = {"q", "w", "e", "r", "t", "y", "u", "i", "o", "p"}
+        a = {"a", "s", "d", "f", "g", "h", "j", "k", "l"}
+        z = {"z","x","c","v","b","n","m"}
+
+
+        ares = [word for word in words if all(ch.lower() in a for ch in word)]
+        qres = [word for word in words if all(ch.lower() in q for ch in word)]
+        zres = [word for word in words if all(ch.lower() in z for ch in word)]
+        return ares + qres + zres
+
