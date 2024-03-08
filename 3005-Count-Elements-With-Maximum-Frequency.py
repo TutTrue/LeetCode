@@ -3,10 +3,9 @@ class Solution:
         freq = defaultdict(int)
         for i in nums:
             freq[i] += 1
-        sorted_freq = sorted(freq.values(), reverse=True)
-        i = 0
-        count = 0
-        while i < len(sorted_freq) and sorted_freq[0] == sorted_freq[i]:
-            count += sorted_freq[i]
-            i+=1
+        m = max(freq.values())
+        count =0
+        for v in freq.values():
+            if v == m:
+                count+=m
         return count
