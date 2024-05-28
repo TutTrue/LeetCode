@@ -1,17 +1,10 @@
 class Solution:
     def equalSubstring(self, s: str, t: str, maxCost: int) -> int:
-        diff = []
-        for i in range(len(s)):
-            diff.append(abs(ord(s[i]) - ord(t[i])))
-        
-        s = 0
-        l, r = 0, 0
-        m = 0
-        while r < len(diff):
-            s+=diff[r]
-            r+=1
-            while s > maxCost:
-                s-=diff[l]
+        cost, l, m = 0, 0, 0
+        for r in range(len(s)):
+            cost+=abs(ord(s[r]) - ord(t[r]))
+            while cost > maxCost:
+                cost-=abs(ord(s[l]) - ord(t[l]))
                 l+=1
-            m = max(m, r - l)
+            m = max(m, r - l + 1)
         return m
