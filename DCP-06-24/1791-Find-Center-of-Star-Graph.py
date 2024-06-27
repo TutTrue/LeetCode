@@ -1,11 +1,3 @@
 class Solution:
     def findCenter(self, edges: List[List[int]]) -> int:
-        dic = defaultdict(int)
-        for n1, n2 in edges:
-            dic[n1] += 1
-            dic[n2] += 1
-        for e, f in dic.items():
-            if f == len(edges):
-                return e
-                
-        return -1
+        return edges[0][0] if edges[0][0] == edges[1][0] or edges[1][1] == edges[0][0] else edges[0][1]
