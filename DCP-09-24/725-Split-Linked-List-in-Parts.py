@@ -12,34 +12,23 @@ class Solution:
             cur = cur.next
 
         cur = head
-        prev = None
         res = [None] * k
+        mod = l % k if k < l else 0
+        k = l // k if k < l else 0
         i = 0
-        if l < k:
-            while cur:
-                res[i] = cur
+        def append_split(cur, k, i):
+            res[i] = cur
+            for _ in range(k):
                 cur = cur.next
-                res[i].next = None
-                i+=1
-        else:
-            mod = l % k
-            k = l // k
-
-            for i in range(mod):
-                res[i] = cur
-                for _ in range(k):
-                    cur = cur.next
-                prev = cur
-                cur = cur.next
-                prev.next = None
-            i = mod
-            while cur:
-                res[i] = cur
-                i+=1
-                for _ in range(k - 1):
-                    cur = cur.next
-                prev = cur
-                cur = cur.next
-                prev.next = None
+            prev = cur
+            cur = cur.next
+            prev.next = None
+            return cur
+        for i in range(mod):
+            cur = append_split(cur, k, i)
+        i = mod
+        while cur:
+            cur = append_split(cur, k - 1, i)
+            i+=1
 
         return res
