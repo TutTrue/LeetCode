@@ -12,8 +12,8 @@ class Solution:
                 return
             if len(res) == level:
                 res.append(node.val)
-            else:
-                res[level] = max(res[level], node.val)
+            elif res[level] < node.val:
+                res[level] = node.val
             
             dfs(node.left, level+1)
             dfs(node.right, level+1)
